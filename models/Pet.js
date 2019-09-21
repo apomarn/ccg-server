@@ -6,7 +6,11 @@ const petSchema = new Schema({
   name: String,
   type: String,
   breed: String,
-  gender: String
+  gender: String,
+  image: {
+    type: String,
+    default: '/images/puppies.jpg'
+  }
 })
 
 const Pet = mongoose.model('Pet', petSchema)
