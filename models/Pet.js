@@ -1,5 +1,5 @@
 const mongoose = require('mongoose')
-// const express  = require('express');
+
 const Schema = mongoose.Schema
 
 const petSchema = new Schema({
