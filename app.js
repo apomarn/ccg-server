@@ -6,6 +6,7 @@ const express = require('express')
 const cors = require('cors')
 
 const Pet = require('./models/Pet')
+const Breed = require('./models/Breed')
 
 const server = express()
 
@@ -33,5 +34,15 @@ server.get('/allpets', (req, res) => {
     })
     .catch(err => {
       console.error('Error getting all pets', err)
+    })
+})
+
+server.get('/allbreeds', (req, res) => {
+  Breed.find()
+    .then(breeds => {
+      res.json(breeds)
+    })
+    .catch(err => {
+      console.error('Error getting all breeds', err)
     })
 })
