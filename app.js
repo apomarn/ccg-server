@@ -37,6 +37,18 @@ server.get('/allpets', (req, res) => {
     })
 })
 
+server.post('/allpets', (req, res) => {
+  let pup = new pup(req.body)
+  pup
+    .save()
+    .then(pup => {
+      res.json(pup)
+    })
+    .catch(err => {
+      console.error('Error saving a pup', err)
+    })
+})
+
 server.get('/allbreeds', (req, res) => {
   Breed.find()
     .then(breeds => {
