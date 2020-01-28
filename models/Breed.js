@@ -3,7 +3,10 @@ const mongoose = require('mongoose')
 const Schema = mongoose.Schema
 
 const breedSchema = new Schema({
-  image: String,
+  image: {
+    type: String,
+    default: '/images/puppies.jpg'
+  },
   breed: String,
   description: String,
   history: String,

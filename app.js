@@ -4,6 +4,7 @@ dotenv.config({ path: '.env' })
 const mongoose = require('mongoose')
 const express = require('express')
 const cors = require('cors')
+const bodyParser = require('body-parser')
 
 const Pet = require('./models/Pet')
 const Breed = require('./models/Breed')
@@ -13,6 +14,7 @@ const server = express()
 const PORT = process.env.PORT || 5000
 
 server.use(cors())
+server.use(bodyParser.json())
 
 server.listen(PORT, () => {
   console.log(`Listening on http://localhost:${PORT}`)
@@ -38,7 +40,8 @@ server.get('/allpets', (req, res) => {
 })
 
 server.post('/allpets', (req, res) => {
-  let pup = new pup(req.body)
+  let pup = new Pet(req.body)
+  console.log(req.body)
   pup
     .save()
     .then(pup => {
@@ -56,5 +59,18 @@ server.get('/allbreeds', (req, res) => {
     })
     .catch(err => {
       console.error('Error getting all breeds', err)
+    })
+})
+
+server.post('/allbreeds', (req, res) => {
+  let breed = new Breed(req.body)
+  console.log(req.body)
+  breed
+    .save()
+    .then(breed => {
+      res.json(breed)
+    })
+    .catch(err => {
+      console.error('Error saving a breed', err)
     })
 })
